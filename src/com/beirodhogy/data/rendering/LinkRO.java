@@ -2,9 +2,12 @@ package com.beirodhogy.data.rendering;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import com.beirodhogy.data.obj.Link;
 import com.google.appengine.api.datastore.Key;
 
+/** it is safe to output rendering object attributes to html */
 public class LinkRO implements RenderingObject {
 	private Key key;
 
@@ -22,8 +25,8 @@ public class LinkRO implements RenderingObject {
 	public LinkRO(Link link) {
 		this.key = link.getKey();
 		this.channel = link.getChannel();
-		this.magick = link.getMagick();
-		this.text = link.getText();
+		this.magick = StringEscapeUtils.escapeHtml(link.getMagick());
+		this.text = StringEscapeUtils.escapeHtml(link.getText());
 		this.insertedAt = link.getInsertedAt();
 	}
 
